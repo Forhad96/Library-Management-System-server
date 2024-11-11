@@ -23,8 +23,20 @@ const getBookById = catchAsync(async (req, res) => {
   });
 
 })
+const updateBook = catchAsync(async (req, res) => {
+  const {bookId} = req.params
+  const result = await BookServices.updateBook(bookId,req.body);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Book updated successfully",
+    data: result,
+  });
+
+})
 
 export const BookControllers = {
   createBook,
-  getBookById
+  getBookById,
+  updateBook,
 };
