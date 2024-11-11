@@ -9,8 +9,17 @@ const getAllMembers = async () => {
   const result = await prisma.member.findMany();
   return result;
 };
+const getMemberById = async (memberId: string) => {
+  const result = await prisma.member.findUniqueOrThrow({
+    where: {
+      memberId,
+    },
+  });
+  return result;
+};
 
 export const MemberServices = {
   createMember,
-  getAllMembers
+  getAllMembers,
+  getMemberById,
 };

@@ -7,4 +7,5 @@ const router = Router();
 
 router.post("/",validateRequest(MembersValidationSchemas.zMemberSchema), MemberControllers.createMember);
 router.get("/",MemberControllers.getAllMembers)
+router.get("/:memberId",MemberControllers.getMemberById)
 export const MemberRoutes = router;
