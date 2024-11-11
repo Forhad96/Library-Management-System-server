@@ -15,7 +15,7 @@ const createBook = catchAsync(async (req, res) => {
 const getAllBooks = catchAsync(async (req, res) => {
   const result = await BookServices.getAllBooks();
   sendResponse(res, {
-    statusCode:201,
+    statusCode:200,
     success: true,
     message: "Book created successfully",
     data: result,
