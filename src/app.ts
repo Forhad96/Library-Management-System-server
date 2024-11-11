@@ -19,7 +19,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // routes
-app.use("/api/v1", router);
+app.use("/api", router);
 app.use(globalErrorHandler);
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({
