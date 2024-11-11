@@ -22,7 +22,10 @@ const updateBook = async (bookId: string, payload: Partial<Book>) => {
   });
   return result;
 };
+
+
 const deleteBook = async (bookId: string) => {
+
   const result = await prisma.book.delete({
     where: {
       bookId,

@@ -36,7 +36,7 @@ const updateBook = catchAsync(async (req, res) => {
 })
 const deleteBook = catchAsync(async (req, res) => {
   const {bookId} = req.params
-  const result = await BookServices.updateBook(bookId,req.body);
+  const result = await BookServices.deleteBook(bookId);
   sendResponse(res, {
     statusCode: 200,
     success: true,
