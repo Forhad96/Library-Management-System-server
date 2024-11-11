@@ -17,9 +17,20 @@ const getMemberById = async (memberId: string) => {
   });
   return result;
 };
+const updateMember = async (memberId: string, payload: Partial<Member>) => {
+  await prisma.member.findUniqueOrThrow({ where: { memberId } });
+  const result = await prisma.member.update({
+    where: {
+      memberId,
+    },
+    data: payload,
+  });
+  return result;
+};
 
 export const MemberServices = {
   createMember,
   getAllMembers,
   getMemberById,
+  updateMember,
 };

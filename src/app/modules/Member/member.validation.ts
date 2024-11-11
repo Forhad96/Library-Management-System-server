@@ -8,7 +8,10 @@ const zMemberSchema = z.object({
     membershipDate: z.string().datetime(),
   }),
 });
-
+const zUpdateMemberSchema = z.object({
+  body: zMemberSchema.partial(),
+});
 export const MembersValidationSchemas = {
   zMemberSchema,
+  zUpdateMemberSchema,
 };

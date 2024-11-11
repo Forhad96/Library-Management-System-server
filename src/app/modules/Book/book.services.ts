@@ -18,6 +18,11 @@ const getBookById = async (bookId: string) => {
   return result;
 };
 const updateBook = async (bookId: string, payload: Partial<Book>) => {
+  await prisma.book.findFirstOrThrow({
+    where: {
+      bookId,
+    },
+  });
   const result = await prisma.book.update({
     where: {
       bookId,
@@ -38,7 +43,7 @@ const deleteBook = async (bookId: string) => {
 
 export const BookServices = {
   createBook,
-getAllBooks,
+  getAllBooks,
   getBookById,
   updateBook,
   deleteBook,

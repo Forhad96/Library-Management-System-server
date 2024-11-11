@@ -30,9 +30,20 @@ const getMemberById = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const updateMember = catchAsync(async (req, res) => {
+  const {memberId} = req.params;
+  const result = await MemberServices.updateMember(memberId,req.body);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Members updated successfully",
+    data: result,
+  });
+});
 
 export const MemberControllers = {
   createMember,
   getAllMembers,
   getMemberById,
+  updateMember,
 };
