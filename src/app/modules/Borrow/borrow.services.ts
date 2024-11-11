@@ -3,8 +3,8 @@ import prisma from "../../../shared/prisma";
 import AppError from "../../errors/appError";
 
 const borrowBook = async (payload: BorrowRecord) => {
-  return await prisma.$transaction(async (transaction) => {
-    const book = await transaction.book.findUniqueOrThrow({
+  return await prisma.$transaction(async (transactionClient) => {
+    const book = await transactionClient.book.findUniqueOrThrow({
       where: {
         bookId: payload.bookId,
       },
@@ -14,16 +14,10 @@ const borrowBook = async (payload: BorrowRecord) => {
       throw new AppError(404, "No available copies of the book");
     }
 
-    const memberExists = await transaction.member.findUnique({
+    await transactionClient.member.findUniqueOrThrow({
       where: { memberId: payload.memberId },
     });
-
-    if (!memberExists) {
-      throw new AppError(404, "Member not found");
-    }
-
-    // Check if the member already has a borrow record for the same book
-    const existingBorrow = await transaction.borrowRecord.findFirst({
+    const existingBorrow = await transactionClient.borrowRecord.findFirst({
       where: {
         memberId: payload.memberId,
         bookId: payload.bookId,
@@ -37,11 +31,11 @@ const borrowBook = async (payload: BorrowRecord) => {
       );
     }
 
-    const result = await transaction.borrowRecord.create({
+    const result = await transactionClient.borrowRecord.create({
       data: payload,
     });
 
-    await transaction.book.update({
+    await transactionClient.book.update({
       where: { bookId: payload.bookId },
       data: { availableCopies: { decrement: 1 } },
     });
@@ -49,6 +43,8 @@ const borrowBook = async (payload: BorrowRecord) => {
     return result;
   });
 };
+
+
 
 export const BorrowServices = {
   borrowBook,

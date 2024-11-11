@@ -12,7 +12,6 @@ const borrowBook = catchAsync(async (req, res) => {
   });
 });
 
-
 export const BorrowControllers = {
-    borrowBook,
-}
+  borrowBook,
+};
