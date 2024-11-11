@@ -1,19 +1,13 @@
 import express from "express";
+import { BookRoutes } from "../modules/Book/book.routes";
 const router = express.Router();
 
 const moduleRoutes = [
   {
-    path: "/users",
-    route: UserRoutes,
+    path: "/books",
+    route: BookRoutes,
   },
-  {
-    path: "/admin",
-    route: AdminRoutes,
-  },
-  {
-    path: "/auth",
-    route: AuthRoutes,
-  },
+
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

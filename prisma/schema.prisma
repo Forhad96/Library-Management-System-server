@@ -19,7 +19,7 @@ model Book {
   genre          String
   publishedYear  Int
   totalCopies    Int
-  avilabeCopiess Int
+  availableCopies Int
   borrowRecord   BorrowRecord[]
 
   @@map("books")
