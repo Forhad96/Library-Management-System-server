@@ -6,5 +6,5 @@ import { MembersValidationSchemas } from "./member.validation";
 const router = Router();
 
 router.post("/",validateRequest(MembersValidationSchemas.zMemberSchema), MemberControllers.createMember);
-
+router.get("/",MemberControllers.getAllMembers)
 export const MemberRoutes = router;

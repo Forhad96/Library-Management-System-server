@@ -11,7 +11,17 @@ const createMember = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllMembers = catchAsync(async (req, res) => {
+  const result = await MemberServices.getAllMembers();
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Members retrieved successfully",
+    data: result,
+  });
+});
 
 export const MemberControllers = {
   createMember,
+  getAllMembers,
 };

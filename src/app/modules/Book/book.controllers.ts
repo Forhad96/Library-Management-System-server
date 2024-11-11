@@ -17,7 +17,7 @@ const getAllBooks = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode:200,
     success: true,
-    message: "Book created successfully",
+    message: "Book retrieves successfully",
     data: result,
   });
 
