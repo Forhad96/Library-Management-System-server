@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
 import { BookServices } from "./book.services";
 import sendResponse from "../../../shared/sendResponse";
+import catchAsync from "../../../shared/catchAsync";
 
-const createBook = async (req: Request, res: Response) => {
+const createBook = catchAsync(async (req, res) => {
   const result = await BookServices.createBook(req.body);
   sendResponse(res, {
     statusCode:200,
@@ -11,7 +11,7 @@ const createBook = async (req: Request, res: Response) => {
     data: result,
   });
 
-};
+})
 
 export const BookControllers = {
   createBook,
