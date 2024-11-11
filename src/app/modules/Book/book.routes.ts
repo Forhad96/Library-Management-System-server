@@ -7,7 +7,7 @@ const router = Router()
 
 
 router.post('/',validateRequest(BookValidationSchemas.zBookSchema) ,BookControllers.createBook)
-
+router.get('/:bookId',BookControllers.getBookById)
 
 
 

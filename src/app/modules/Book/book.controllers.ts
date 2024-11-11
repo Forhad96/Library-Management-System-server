@@ -5,9 +5,20 @@ import catchAsync from "../../../shared/catchAsync";
 const createBook = catchAsync(async (req, res) => {
   const result = await BookServices.createBook(req.body);
   sendResponse(res, {
-    statusCode:200,
+    statusCode:201,
     success: true,
     message: "Book created successfully",
+    data: result,
+  });
+
+})
+const getBookById = catchAsync(async (req, res) => {
+  const {bookId} = req.params
+  const result = await BookServices.getBookById(bookId);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Book retrieved successfully",
     data: result,
   });
 
@@ -15,4 +26,5 @@ const createBook = catchAsync(async (req, res) => {
 
 export const BookControllers = {
   createBook,
+  getBookById
 };
