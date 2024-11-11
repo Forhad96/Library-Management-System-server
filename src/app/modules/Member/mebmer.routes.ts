@@ -12,9 +12,11 @@ router.post(
 );
 router.get("/", MemberControllers.getAllMembers);
 router.get("/:memberId", MemberControllers.getMemberById);
-router.patch(
+router.put(
   "/:memberId",
   validateRequest(MembersValidationSchemas.zUpdateMemberSchema),
   MemberControllers.updateMember
 );
+
+router.delete("/:memberId", MemberControllers.deleteMember);
 export const MemberRoutes = router;

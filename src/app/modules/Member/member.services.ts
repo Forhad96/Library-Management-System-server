@@ -27,10 +27,20 @@ const updateMember = async (memberId: string, payload: Partial<Member>) => {
   });
   return result;
 };
+const deleteMember = async (memberId: string) => {
+  await prisma.member.findUniqueOrThrow({ where: { memberId } });
+  const result = await prisma.member.delete({
+    where: {
+      memberId,
+    },
+  });
+  return result;
+};
 
 export const MemberServices = {
   createMember,
   getAllMembers,
   getMemberById,
   updateMember,
+  deleteMember
 };
