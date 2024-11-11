@@ -1,11 +1,12 @@
 import { Book, PrismaClient } from "@prisma/client";
+import prisma from "../../../shared/prisma";
 
-const prisma = new PrismaClient();
+
 
 const createBook = async (payload: Book) => {
 
-  const result = await prisma.book.create({ data: payload });
-  return result;
+//   const result = await prisma.book.create({ data: payload });
+  return payload;
 };
 
 export const BookServices = {
