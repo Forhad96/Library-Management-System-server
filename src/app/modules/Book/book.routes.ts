@@ -7,8 +7,9 @@ const router = Router()
 
 
 router.post('/',validateRequest(BookValidationSchemas.zBookSchema) ,BookControllers.createBook)
+router.get('/',BookControllers.getAllBooks)
 router.get('/:bookId',BookControllers.getBookById)
-router.patch('/:bookId',BookControllers.updateBook)
+router.patch('/:bookId',validateRequest(BookValidationSchemas.zUpdateBookSchema),BookControllers.updateBook)
 router.delete('/:bookId',BookControllers.deleteBook)
 
 

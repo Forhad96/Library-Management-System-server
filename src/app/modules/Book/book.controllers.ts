@@ -12,6 +12,16 @@ const createBook = catchAsync(async (req, res) => {
   });
 
 })
+const getAllBooks = catchAsync(async (req, res) => {
+  const result = await BookServices.getAllBooks();
+  sendResponse(res, {
+    statusCode:201,
+    success: true,
+    message: "Book created successfully",
+    data: result,
+  });
+
+})
 const getBookById = catchAsync(async (req, res) => {
   const {bookId} = req.params
   const result = await BookServices.getBookById(bookId);
@@ -48,6 +58,7 @@ const deleteBook = catchAsync(async (req, res) => {
 
 export const BookControllers = {
   createBook,
+  getAllBooks,
   getBookById,
   updateBook,
   deleteBook

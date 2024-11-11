@@ -11,6 +11,10 @@ const zBookSchema = z.object({
   }),
 });
 
+const zUpdateBookSchema = z.object({
+  body: zBookSchema.partial(), // Apply partial here to make all book properties optional
+});
+
 const BorrowRecordSchema = z.object({
   recordId: z.string().uuid(),
   borrowedDate: z.date(),
@@ -21,4 +25,5 @@ const BorrowRecordSchema = z.object({
 
 export const BookValidationSchemas = {
   zBookSchema,
+  zUpdateBookSchema,
 };
