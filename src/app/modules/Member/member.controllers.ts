@@ -21,7 +21,7 @@ const getAllMembers = catchAsync(async (req, res) => {
   });
 });
 const getMemberById = catchAsync(async (req, res) => {
-  const {memberId} = req.params;
+  const { memberId } = req.params;
   const result = await MemberServices.getMemberById(memberId);
   sendResponse(res, {
     statusCode: 200,
@@ -31,8 +31,8 @@ const getMemberById = catchAsync(async (req, res) => {
   });
 });
 const updateMember = catchAsync(async (req, res) => {
-  const {memberId} = req.params;
-  const result = await MemberServices.updateMember(memberId,req.body);
+  const { memberId } = req.params;
+  const result = await MemberServices.updateMember(memberId, req.body);
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -41,13 +41,12 @@ const updateMember = catchAsync(async (req, res) => {
   });
 });
 const deleteMember = catchAsync(async (req, res) => {
-  const {memberId} = req.params;
-  const result = await MemberServices.deleteMember(memberId);
+  const { memberId } = req.params;
+  await MemberServices.deleteMember(memberId);
   sendResponse(res, {
     statusCode: 200,
     success: true,
     message: "Members successfully Deleted",
-    data: result,
   });
 });
 
@@ -56,5 +55,5 @@ export const MemberControllers = {
   getAllMembers,
   getMemberById,
   updateMember,
-  deleteMember
+  deleteMember,
 };
