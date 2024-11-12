@@ -5,6 +5,7 @@ import { ZodError } from "zod";
 import handleZodError from "../errors/handleZodError";
 import config from "../config";
 import { TErrorSources } from "../interface/error";
+import AppError from "../errors/appError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
@@ -21,6 +22,23 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorSources = simplifiedError?.errorSources;
+  } else if (err instanceof AppError) {
+    statusCode = err?.statusCode;
+    message = err.message;
+    errorSources = [
+      {
+        path: "",
+        message: err?.message,
+      },
+    ];
+  } else if (err instanceof Error) {
+    message = err.message;
+    errorSources = [
+      {
+        path: "",
+        message: err?.message,
+      },
+    ];
   }
 
   // Send the error response
@@ -28,7 +46,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     success: false,
     status: statusCode,
     message,
-    errorSources
+    errorSources,
   });
 };
 export default globalErrorHandler;

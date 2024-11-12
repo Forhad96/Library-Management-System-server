@@ -34,7 +34,8 @@ const borrowBook = async (payload: BorrowRecord) => {
     const result = await transactionClient.borrowRecord.create({
       data: payload,
     });
-
+    console.log(result);
+    return;
     await transactionClient.book.update({
       where: { bookId: payload.bookId },
       data: { availableCopies: { decrement: 1 } },
