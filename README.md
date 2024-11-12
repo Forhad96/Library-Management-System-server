@@ -1,8 +1,7 @@
 
 # LMS Server
 
-A backend system for a Library Management System (LMS) to manage books, members, borrowing records, and overdue tracking.
-
+A comprehensive backend API for managing library operations, including book cataloging, member registration, borrowing, and returning of books. Built with Node.js, Express, TypeScript, Prisma ORM, and PostgreSQL, this API provides seamless interactions for frontend applications.
 ---
 
 ## API Endpoints

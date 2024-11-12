@@ -6,9 +6,11 @@ import handleZodError from "../errors/handleZodError";
 import config from "../config";
 import { TErrorSources } from "../interface/error";
 import AppError from "../errors/appError";
+import handleDuplicateError from "../errors/handleDuplicateError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
+  console.log(err.code);
   let message = "something went wrong!";
   let errorSources: TErrorSources = [
     {
@@ -22,7 +24,14 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorSources = simplifiedError?.errorSources;
-  } else if (err instanceof AppError) {
+  } 
+  else if (err?.code === "P2002") {
+    const simplifiedError = handleDuplicateError(err);
+    statusCode = simplifiedError?.statusCode;
+    message = simplifiedError?.message;
+    errorSources = simplifiedError?.errorSources;
+  }
+  else if (err instanceof AppError) {
     statusCode = err?.statusCode;
     message = err.message;
     errorSources = [
