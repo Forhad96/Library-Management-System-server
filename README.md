@@ -1,34 +1,33 @@
-
 # LMS Server
 
-A comprehensive backend API for managing library operations, including book cataloging, member registration, borrowing, and returning of books. Built with Node.js, Express, TypeScript, Prisma ORM, and PostgreSQL, this API provides seamless interactions for frontend applications.
----
+## A comprehensive backend API for managing library operations, including book cataloging, member registration, borrowing, and returning of books. Built with Node.js, Express, TypeScript, Prisma ORM, and PostgreSQL, this API provides seamless interactions for frontend applications.
 
 ## API Endpoints
 
-| Feature               | Method | Endpoint                  | Description                                      |
-|-----------------------|--------|---------------------------|--------------------------------------------------|
-| **Book Management**   |        |                           |                                                  |
-| Create Book           | POST   | `/api/books`             | Creates a new book record                        |
-| Read All Books        | GET    | `/api/books`             | Retrieves a list of all books                    |
-| Read Book by ID       | GET    | `/api/books/:bookId`     | Retrieves details of a specific book             |
-| Update Book           | PUT    | `/api/books/:bookId`     | Updates information of a specific book           |
-| Delete Book           | DELETE | `/api/books/:bookId`     | Deletes a book from the library                  |
-| **Member Management** |        |                           |                                                  |
-| Create Member         | POST   | `/api/members`           | Adds a new member to the library                 |
-| Read All Members      | GET    | `/api/members`           | Retrieves a list of all members                  |
-| Read Member by ID     | GET    | `/api/members/:memberId` | Retrieves details of a specific member           |
-| Update Member         | PUT    | `/api/members/:memberId` | Updates information of a specific member         |
-| Delete Member         | DELETE | `/api/members/:memberId` | Deletes a member from the library                |
-| **Borrow & Return**   |        |                           |                                                  |
-| Borrow a Book         | POST   | `/api/borrow`            | Records a book as borrowed by a member           |
-| Return a Book         | POST   | `/api/return`            | Records the return of a borrowed book            |
-| **Overdue List**      | GET    | `/api/borrow/overdue`    | Retrieves a list of overdue borrowed books       |
+| Feature               | Method | Endpoint                 | Description                                |
+| --------------------- | ------ | ------------------------ | ------------------------------------------ |
+| **Book Management**   |        |                          |                                            |
+| Create Book           | POST   | `/api/books`             | Creates a new book record                  |
+| Read All Books        | GET    | `/api/books`             | Retrieves a list of all books              |
+| Read Book by ID       | GET    | `/api/books/:bookId`     | Retrieves details of a specific book       |
+| Update Book           | PUT    | `/api/books/:bookId`     | Updates information of a specific book     |
+| Delete Book           | DELETE | `/api/books/:bookId`     | Deletes a book from the library            |
+| **Member Management** |        |                          |                                            |
+| Create Member         | POST   | `/api/members`           | Adds a new member to the library           |
+| Read All Members      | GET    | `/api/members`           | Retrieves a list of all members            |
+| Read Member by ID     | GET    | `/api/members/:memberId` | Retrieves details of a specific member     |
+| Update Member         | PUT    | `/api/members/:memberId` | Updates information of a specific member   |
+| Delete Member         | DELETE | `/api/members/:memberId` | Deletes a member from the library          |
+| **Borrow & Return**   |        |                          |                                            |
+| Borrow a Book         | POST   | `/api/borrow`            | Records a book as borrowed by a member     |
+| Return a Book         | POST   | `/api/return`            | Records the return of a borrowed book      |
+| **Overdue List**      | GET    | `/api/borrow/overdue`    | Retrieves a list of overdue borrowed books |
 
 ---
 
 ## Live URL
-[Live API Deployment](https://your-deployed-api-url.com)
+
+[Library Management System Api](https://library-management-server-steel.vercel.app)
 
 ---
 
@@ -46,18 +45,21 @@ A comprehensive backend API for managing library operations, including book cata
 ## Setup Instructions
 
 ### Prerequisites
+
 - Node.js and npm installed
 - PostgreSQL database
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/LMS-Server.git
    cd LMS-Server
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -84,16 +86,19 @@ A comprehensive backend API for managing library operations, including book cata
    ```
 
 4. **Generate Prisma client**
+
    ```bash
    npx prisma generate
    ```
 
 5. **Run database migrations**
+
    ```bash
    npx prisma migrate dev
    ```
 
 6. **Start the server**
+
    ```bash
    npm start
    ```

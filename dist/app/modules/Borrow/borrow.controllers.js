@@ -25,8 +25,8 @@ const borrowBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         data: result,
     });
 }));
-const getAllBorrowBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield borrow_services_1.BorrowServices.getAllBorrowBook();
+const getAllBorrowBooks = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield borrow_services_1.BorrowServices.getAllBorrowBooks();
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
@@ -34,7 +34,17 @@ const getAllBorrowBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 
         data: result,
     });
 }));
+const getOverdueBooks = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield borrow_services_1.BorrowServices.getOverdueBooks();
+    (0, sendResponse_1.default)(res, {
+        statusCode: 200,
+        success: true,
+        message: "Overdue borrow list fetched",
+        data: result,
+    });
+}));
 exports.BorrowControllers = {
     borrowBook,
-    getAllBorrowBook,
+    getAllBorrowBooks,
+    getOverdueBooks,
 };
