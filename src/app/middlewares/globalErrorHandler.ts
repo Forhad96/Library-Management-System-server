@@ -24,14 +24,12 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorSources = simplifiedError?.errorSources;
-  } 
-  else if (err?.code === "P2002") {
+  } else if (err?.code === "P2002") {
     const simplifiedError = handleDuplicateError(err);
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
     errorSources = simplifiedError?.errorSources;
-  }
-  else if (err instanceof AppError) {
+  } else if (err instanceof AppError) {
     statusCode = err?.statusCode;
     message = err.message;
     errorSources = [
@@ -55,7 +53,8 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     success: false,
     status: statusCode,
     message,
-    errorSources,
+    // errorSources,
+    // stack: config.environment === "development" ? err?.stack : null,
   });
 };
 export default globalErrorHandler;

@@ -34,8 +34,6 @@ const borrowBook = async (payload: BorrowRecord) => {
     const result = await transactionClient.borrowRecord.create({
       data: payload,
     });
-    console.log(result);
-    return;
     await transactionClient.book.update({
       where: { bookId: payload.bookId },
       data: { availableCopies: { decrement: 1 } },
@@ -45,8 +43,50 @@ const borrowBook = async (payload: BorrowRecord) => {
   });
 };
 
+const getAllBorrowBooks = async () => {
+  const result = await prisma.borrowRecord.findMany();
+  return result;
+};
+const getOverdueBooks = async () => {
+  const overdueThreshold = new Date();
+  overdueThreshold.setDate(overdueThreshold.getDate() - 14);
+
+  // Query overdue records
+  const overdueRecords = await prisma.borrowRecord.findMany({
+    where: {
+      returnDate: null, // Book not returned
+      borrowDate: { lt: overdueThreshold }, // Borrowed more than 14 days ago
+    },
+    include: {
+      book: { select: { title: true } },
+      member: { select: { name: true } },
+    },
+  });
+
+  // Map the results to include overdue days
+  return overdueRecords.map((record) => {
+    const borrowDate = new Date(record.borrowDate).getTime();
+    console.log({borrowDate});
+    const currentDate = new Date().getTime();
+
+    // Calculate overdue days by dividing the milliseconds difference by the number of milliseconds in a day
+    const overdueDays =
+      Math.floor((currentDate - borrowDate) / (1000 * 60 * 60 * 24)) - 14;
+
+    return {
+      borrowId: record.borrowId,
+      bookTitle: record.book.title,
+      borrowerName: record.member.name,
+      overdueDays,
+    };
+  });
+
+};
 
 
 export const BorrowServices = {
   borrowBook,
+  getAllBorrowBooks,
+  getOverdueBooks
+
 };
